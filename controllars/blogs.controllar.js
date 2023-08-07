@@ -23,6 +23,15 @@ module.exports.getBlogsDetail = (req, res) => {
     // console.log(id)
     const foundBlogs = blogs.find(blog => blog.id === Number(id))
     res.send(foundBlogs);
+    res.status(200).send({
+        success: true,
+        message: "Success",
+        data: blogs
+    });
+    res.status(500).send({
+        success:false,
+        error:"Internal Server Error."
+    });
 };
 
 module.exports.updateBlogs = (req, res) => {
