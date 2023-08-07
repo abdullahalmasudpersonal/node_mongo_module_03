@@ -1,6 +1,6 @@
 module.exports.getAlltools = (req,res, next) =>{
-    const {ip, query, params, body, headers} = req;
-    console.log(ip, query, params, body, headers);
+   // const {ip, query, params, body, headers} = req;
+   // console.log(ip, query, params, body, headers);
    // res.redirect('/login');
     //res.json({"name":'abc'})
     //res.download(__dirname + '/blogs.controllar.js');
