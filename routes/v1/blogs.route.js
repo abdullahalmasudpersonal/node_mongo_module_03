@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAlltools, saveATools, getBlogsDetail } = require('../../controllars/blogs.controllar');
+const { getAlltools, saveATools, getBlogsDetail, updateBlogs, deleteBlogs } = require('../../controllars/blogs.controllar');
 const viewCount = require('../../middleWare/viewCount');
 const { limiter } = require('../../middleWare/limiter');
 
@@ -20,6 +20,11 @@ router
 
     .post(saveATools);
 
-router.route('/:id').get(viewCount,limiter, getBlogsDetail);
+router
+.route('/:id')
+.get(viewCount,/* limiter, */ getBlogsDetail)
+.patch(updateBlogs)
+.delete(deleteBlogs)
+
 
 module.exports = router;

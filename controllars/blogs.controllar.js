@@ -1,17 +1,47 @@
-module.exports.getAlltools = (req,res, next) =>{
-   // const {ip, query, params, body, headers} = req;
-   // console.log(ip, query, params, body, headers);
-   // res.redirect('/login');
-    //res.json({"name":'abc'})
-    //res.download(__dirname + '/blogs.controllar.js');
-    //res.send('blogs found')
-    next();
+let blogs = [
+    { id: 1, name: 'abdullah' },
+    { id: 2, name: 'masud' },
+    { id: 3, name: 'mahmud' },
+    { id: 4, name: 'hafiz' }
+];
+
+module.exports.getAlltools = (req, res, next) => {
+    const { limit, page } = req.query;
+    console.log(limit, page)
+    res.json(blogs.slice(0, limit));
+    //  next();
 };
 
-module.exports.saveATools = (req,res) =>{
-    res.send('blogs found');
+module.exports.saveATools = (req, res) => {
+    console.log(req.query);
+    blogs.push(req.body);
+    res.send(blogs);
 };
 
-module.exports.getBlogsDetail = (req,res) =>{
-    res.send('blogs found');
+module.exports.getBlogsDetail = (req, res) => {
+    const { id } = req.params;
+    // console.log(id)
+    const foundBlogs = blogs.find(blog => blog.id === Number(id))
+    res.send(foundBlogs);
 };
+
+module.exports.updateBlogs = (req, res) => {
+    //  const newData = req.body;
+    const { id } = req.params;
+    const filter = { _id: id };
+
+    const newData = blogs.find(blog => blog.id === Number(id));
+
+    newData.id = id;
+    newData.name = req.body.name;
+    res.send(newData);
+}
+
+module.exports.deleteBlogs=(req,res )=>{
+    const {id} = req.params;
+    const filter = {_id: id};
+
+    blogs = blogs.filter(blog => blog.id !== Number(id));
+
+    res.send(blogs);
+}
